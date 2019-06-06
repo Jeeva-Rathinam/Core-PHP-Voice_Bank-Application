@@ -72,7 +72,6 @@ if(isset($_POST["action"]))
 		";
 	}
 
-
 	$statement = $connect->prepare($query);
 	$statement->execute();
 	$result = $statement->fetchAll();
@@ -101,13 +100,12 @@ if(isset($_POST["action"]))
 
 			</div>
 			';
-		}
+		} 
 	}
-	else
+	else 
 	{
 		$output = '<h3>No Data Found</h3>';
 	}
 	echo $output;
 }
-
 ?>
