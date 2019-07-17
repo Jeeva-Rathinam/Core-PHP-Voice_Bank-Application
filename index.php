@@ -1,4 +1,6 @@
 <?php 
+session_start();
+
 
 //index.php
 
@@ -32,9 +34,10 @@ include('database_connection.php');
     <!-- Page Content -->
     <div class="container">
         <div class="row">
-        	<br />
-        	<h2 align="center">All Languages Voice Repository</h2>
-        	<br />
+            <br />
+            <div class="col-md-12">
+        	    <h2 align="center">Voice Repository Bank</h2>
+        	</div>
             <div class="col-md-3">
 
                 <!-- Price -->
@@ -109,11 +112,7 @@ include('database_connection.php');
                     <?php
                     }
                     ?>	
-                </div>
-
-
-
-                
+                </div> 
                 <!-- Gender  -->
                 <div class="list-group">
 					<h3>Gender</h3>
@@ -187,6 +186,9 @@ include('database_connection.php');
 
                 </div>
             </div>
+
+
+            
         </div>
 
     </div>
@@ -194,7 +196,7 @@ include('database_connection.php');
 #loading
 {
 	text-align:center; 
-	background: url('loader.gif') no-repeat center; 
+	background: url('images/loader.gif') no-repeat center; 
 	height: 150px;
 }
 </style>

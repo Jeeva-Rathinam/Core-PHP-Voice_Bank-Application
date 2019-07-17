@@ -1,8 +1,16 @@
 <?php
 
-//fetch_data.php
+session_start();
+// if (isset($_SESSION['playlist'])) {
+// 	echo '<pre>', print_r($_SESSION['playlist'], 1), '</pre>';
+// 	echo "</hr><br>\n";
+// }
+
 
 include('database_connection.php');
+
+
+// start Custom filter
 
 if(isset($_POST["action"]))
 {
@@ -10,12 +18,6 @@ if(isset($_POST["action"]))
 		SELECT * FROM voice_bank_data WHERE voice_status = '1'
 	";
 
-	// if(isset($_POST["minimum_price"], $_POST["maximum_price"]) && !empty($_POST["minimum_price"]) && !empty($_POST["maximum_price"]))
-	// {
-	// 	$query .= "
-	// 	 AND product_price BETWEEN '".$_POST["minimum_price"]."' AND '".$_POST["maximum_price"]."'
-	// 	";
-	// }
 
 	// Gender
 	if(isset($_POST["gender"]))
@@ -72,6 +74,8 @@ if(isset($_POST["action"]))
 		";
 	}
 
+// start Custom filter
+
 	$statement = $connect->prepare($query);
 	$statement->execute();
 	$result = $statement->fetchAll();
@@ -90,12 +94,18 @@ if(isset($_POST["action"]))
 					<p align="center"><strong> '. $row['voice_name'] .'</strong></p>
 
 					<p style="font-size: 12px;">
+					Voice Sku		  : '. $row['voice_sku'].' <br />	
+					voice Name        :	'. $row['voice_name'].' <br />
 					Gender		      : '. $row['voice_gender'].' <br />
 					Genres 			  : '. $row['voice_genres'].' <br />
 					Voice Modulation  : '. $row['voice_voice_modulation'].' <br />
 					Languages		  : '. $row['voice_languages'].' <br />
 					Jingle Moods	  : '. $row['voice_jingle_moods'].' <br />
 					Ivr 			  : '. $row['voice_ivr'].' <br /> </p>
+	
+
+					<button type="button" class="btn btn-primary" type="submit" style="padding: 5px 83px 5px 83px;" data-voice_sku="'.$row["voice_sku"].'" data-voice_name="'.$row["voice_name"].'">Add to Playlist</button>
+
 				</div>
 
 			</div>
@@ -109,3 +119,61 @@ if(isset($_POST["action"]))
 	echo $output;
 }
 ?>
+
+<html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$().ready( function() {
+
+    $(".btn").click( function() {
+        var vid = $(this).data("voice_sku");
+        var vname = $(this).data("voice_name");
+        
+        $.post(
+            "manage_cart.php",
+            { "voice_sku" : vid, "voice_name" : vname, "action" : "Add" },
+            function(resp) {
+                outputPlaylist(resp)
+            },
+            "JSON"
+        )
+    })
+    
+    function outputPlaylist(resp) {
+        var list = "<tr><td><b>ID</b></td><td><b>Title</b></td></tr>\n";
+        $.each(resp, function(k, v) {
+            list = list + "<tr><td>" + k + "</td><td>" + v + "</td>"
+            list = list + "<td><button class='delbtn' data-voice_sku='"+ k +"'>Delete</button></td></tr>\n"  //Delete button to each item
+        })
+        $("#playlist").html(list)
+        
+        // define action for new delbtn's
+        $(".delbtn").click( function() {
+            var vid = $(this).data("voice_sku");
+            
+            $.post(
+                "manage_cart.php",
+                { "voice_sku" : vid, "action" : "Delete"},
+                function(resp) {
+                    outputPlaylist(resp)
+                },
+                "JSON"
+            )
+        })
+    }
+})
+</script>
+</head>
+<body>
+
+		<h2>Playlists...</h2>
+		
+    	<table style="width:600px" id="playlist">
+
+	
+		</table>
+
+</body>
+</html>
