@@ -16,7 +16,6 @@ if ($_SERVER['REQUEST_METHOD']=='POST') {
     elseif ($action == 'Add')  {
         // we are adding the item
         $voice_name = $_POST['voice_name'] ?? '';
-        
         if ($voice_sku && $voice_name) {
             $_SESSION['playlist'][$voice_sku] = $voice_name;
             exit(json_encode($_SESSION['playlist'])) ;
