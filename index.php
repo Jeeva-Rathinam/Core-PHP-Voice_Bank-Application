@@ -1,11 +1,7 @@
 <?php 
 session_start();
-
-
 //index.php
-
 include('database_connection.php');
-
 ?>
 
 <!DOCTYPE html>
@@ -35,9 +31,15 @@ include('database_connection.php');
     <div class="container">
         <div class="row">
             <br />
-            <div class="col-md-12">
-        	    <h2 align="center">Voice Repository Bank</h2>
-        	</div>
+      
+            <div class="p-3 mb-2 bg-info text-white col-md-12 well">
+            <h3 style="margin: 5px 0px 5px 25px;">Voice Repository Bank
+                    <button class="btn btn-primary btn btn-secondary pull-right" onclick="window.location.href = 'my_cart.php';">Playlists</button> 
+                </h3>
+            </div>
+
+            <br />
+            
             <div class="col-md-3">
 
                 <!-- Price -->
@@ -135,8 +137,6 @@ include('database_connection.php');
                     ?>
                     </div>
                 </div>
-
-
                 <!-- Jingle Moods -->
                 <div class="list-group">
 					<h3>Jingle Moods</h3>
@@ -183,12 +183,11 @@ include('database_connection.php');
             <div class="col-md-9">
             	<br />
                 <div class="row filter_data">
+                
 
                 </div>
             </div>
-
-
-            
+               
         </div>
 
     </div>

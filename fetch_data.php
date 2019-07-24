@@ -55,7 +55,7 @@ if(isset($_POST["action"]))
 		 AND voice_languages IN('".$languages_filter."')
 		";
 	}
-
+	
 	// Jingle Moods
 	if(isset($_POST["jingle_moods"]))
 	{
@@ -104,8 +104,7 @@ if(isset($_POST["action"]))
 					Ivr 			  : '. $row['voice_ivr'].' <br /> </p>
 	
 
-					<button type="button" class="btn btn-primary" type="submit" style="padding: 5px 83px 5px 83px;" data-voice_sku="'.$row["voice_sku"].'" data-voice_name="'.$row["voice_name"].'">Add to Playlist</button>
-
+					<button type="button" class="btn btn-primary" type="submit" style="padding: 5px 83px 5px 83px;" data-voice_sku="'.$row["voice_sku"].'" data-voice_name="'.$row["voice_name"].'" onclick="this.disabled=true">Add to Playlist</button>
 				</div>
 
 			</div>
@@ -166,7 +165,7 @@ $().ready( function() {
 })
 </script>
 </head>
-<body>
+<!-- <body>
 
 		<h2>Playlists...</h2>
 		
@@ -175,5 +174,5 @@ $().ready( function() {
 	
 		</table>
 
-</body>
+</body> -->
 </html>
