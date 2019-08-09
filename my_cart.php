@@ -13,10 +13,11 @@
         $('#voice_bank').DataTable();
     } );
     </script>
-
 </head>
  
-<body> 
+<body>
+    
+
 <div class="container">
 
     <h2 align="center">Play Lists</h2> 
